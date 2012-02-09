@@ -1,16 +1,12 @@
 import os
-import tornado.ioloop
-import tornado.web
+import sqlalchemy
+from flask import Flask
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+app = Flask(__name__)
 
-application = tornado.web.Application([
-    (r"/", MainHandler),
-])
+@app.route("/")
+def hello():
+    return "Hello World!"
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    application.listen(port)
-    tornado.ioloop.IOLoop.instance().start()
+    app.run()
